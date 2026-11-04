@@ -1,6 +1,8 @@
 # Releasing
 
-Pushing a tag `v<version>` runs `.github/workflows/release.yml`. The workflow uploads that version to the Central Portal, which validates and publishes it without a manual step, waits until Maven Central has published it, and then creates a GitHub release with notes generated from the merged pull requests and commits since the previous tag. Pushing the tag therefore publishes the version.
+Pushing a tag `v<version>` runs `.github/workflows/release.yml`. The workflow uploads that version to the Central Portal, which validates and publishes it without a manual step, waits until Maven Central has published it, and then creates a GitHub release whose notes are that version's section of `CHANGELOG.md`. Pushing the tag therefore publishes the version.
+
+Before tagging, run the [UI tests](https://github.com/ysmsm/nav3-uikit/actions/workflows/ui-tests.yml) workflow on `main` and check that every failure is a known issue. In `CHANGELOG.md`, rename **Unreleased** to the new version with the release date, add an empty **Unreleased** above it, and update the comparison links at the bottom. The workflow stops before publishing anything when `CHANGELOG.md` has no section for the tagged version.
 
 1. Set the version in the README's install snippet to the one being released and merge that change.
 2. Tag the merged commit and push the tag:

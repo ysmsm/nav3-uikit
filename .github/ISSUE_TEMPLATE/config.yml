@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or usage help
+    url: https://github.com/ysmsm/nav3-uikit/discussions/new?category=q-a
+    about: Ask how to use nav3-uikit in Discussions.
+  - name: Bug in Compose Multiplatform itself
+    url: https://youtrack.jetbrains.com/newIssue?project=CMP
+    about: If the bug also happens with a plain NavDisplay, report it to JetBrains.
+  - name: Security vulnerability
+    url: https://github.com/ysmsm/nav3-uikit/security/advisories/new
+    about: Report vulnerabilities privately, not in a public issue.

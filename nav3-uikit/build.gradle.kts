@@ -52,6 +52,10 @@ mavenPublishing {
 kotlin {
     explicitApi()
 
+    // The dumps in nav3-uikit/api make every public API change show up in review; CI fails when they are stale.
+    @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
+    abiValidation()
+
     android {
         namespace = "dev.seungmin.nav3.uikit"
         compileSdk = 37

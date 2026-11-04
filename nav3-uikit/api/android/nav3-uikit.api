@@ -1,0 +1,126 @@
+public final class dev/seungmin/nav3/uikit/NativeBarButton {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function0;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ZLkotlin/jvm/functions/Function0;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getEnabled ()Z
+	public final fun getOnClick ()Lkotlin/jvm/functions/Function0;
+	public final fun getSystemImage ()Ljava/lang/String;
+	public final fun getTitle ()Ljava/lang/String;
+}
+
+public final class dev/seungmin/nav3/uikit/NativeNavDisplayKt {
+	public static final fun NativeNavDisplay (Ljava/util/List;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment;Ljava/util/List;Ljava/util/List;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/SizeTransform;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function0;Landroidx/compose/runtime/Composer;III)V
+	public static final fun NativeNavDisplay (Ljava/util/List;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment;Lkotlin/jvm/functions/Function0;Ljava/util/List;Ljava/util/List;Ljava/util/List;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/SizeTransform;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+}
+
+public final class dev/seungmin/nav3/uikit/NativeNavigation {
+	public static final field $stable I
+	public static final field INSTANCE Ldev/seungmin/nav3/uikit/NativeNavigation;
+	public final fun navigationBarHidden ()Ljava/util/Map;
+	public final fun sheet (Ljava/util/List;Z)Ljava/util/Map;
+	public static synthetic fun sheet$default (Ldev/seungmin/nav3/uikit/NativeNavigation;Ljava/util/List;ZILjava/lang/Object;)Ljava/util/Map;
+	public final fun tabBarHidden ()Ljava/util/Map;
+	public final fun title (Ljava/lang/String;Z)Ljava/util/Map;
+	public static synthetic fun title$default (Ldev/seungmin/nav3/uikit/NativeNavigation;Ljava/lang/String;ZILjava/lang/Object;)Ljava/util/Map;
+}
+
+public final class dev/seungmin/nav3/uikit/NativeNavigation$LargeTitle : androidx/navigation3/runtime/NavMetadataKey {
+	public static final field $stable I
+	public static final field INSTANCE Ldev/seungmin/nav3/uikit/NativeNavigation$LargeTitle;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/seungmin/nav3/uikit/NativeNavigation$NavigationBarHidden : androidx/navigation3/runtime/NavMetadataKey {
+	public static final field $stable I
+	public static final field INSTANCE Ldev/seungmin/nav3/uikit/NativeNavigation$NavigationBarHidden;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/seungmin/nav3/uikit/NativeNavigation$Presentation : androidx/navigation3/runtime/NavMetadataKey {
+	public static final field $stable I
+	public static final field INSTANCE Ldev/seungmin/nav3/uikit/NativeNavigation$Presentation;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/seungmin/nav3/uikit/NativeNavigation$TabBarHidden : androidx/navigation3/runtime/NavMetadataKey {
+	public static final field $stable I
+	public static final field INSTANCE Ldev/seungmin/nav3/uikit/NativeNavigation$TabBarHidden;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/seungmin/nav3/uikit/NativeNavigation$Title : androidx/navigation3/runtime/NavMetadataKey {
+	public static final field $stable I
+	public static final field INSTANCE Ldev/seungmin/nav3/uikit/NativeNavigation$Title;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/seungmin/nav3/uikit/NativeNavigationBarKt {
+	public static final fun getLocalNativeNavigationBar ()Landroidx/compose/runtime/CompositionLocal;
+}
+
+public final class dev/seungmin/nav3/uikit/NativeNavigationBar_nonIosKt {
+	public static final fun NativeNavigationBarItems (Ljava/lang/String;Ljava/util/List;Landroidx/compose/runtime/Composer;II)V
+}
+
+public abstract interface class dev/seungmin/nav3/uikit/NativePresentation {
+}
+
+public final class dev/seungmin/nav3/uikit/NativePresentation$Push : dev/seungmin/nav3/uikit/NativePresentation {
+	public static final field $stable I
+	public static final field INSTANCE Ldev/seungmin/nav3/uikit/NativePresentation$Push;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/seungmin/nav3/uikit/NativePresentation$Sheet : dev/seungmin/nav3/uikit/NativePresentation {
+	public static final field $stable I
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;Z)V
+	public synthetic fun <init> (Ljava/util/List;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Z
+	public final fun copy (Ljava/util/List;Z)Ldev/seungmin/nav3/uikit/NativePresentation$Sheet;
+	public static synthetic fun copy$default (Ldev/seungmin/nav3/uikit/NativePresentation$Sheet;Ljava/util/List;ZILjava/lang/Object;)Ldev/seungmin/nav3/uikit/NativePresentation$Sheet;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDetents ()Ljava/util/List;
+	public final fun getGrabberVisible ()Z
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/seungmin/nav3/uikit/NativeTab {
+	public static final field $stable I
+	public fun <init> (Ljava/util/List;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun getBackStack ()Ljava/util/List;
+	public final fun getIcon ()Landroidx/compose/ui/graphics/painter/Painter;
+	public final fun getSystemImage ()Ljava/lang/String;
+	public final fun getTitle ()Ljava/lang/String;
+}
+
+public final class dev/seungmin/nav3/uikit/NativeTabDisplayKt {
+	public static final fun NativeTabDisplay (Ljava/util/List;ILkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment;Lkotlin/jvm/functions/Function1;Ljava/util/List;Ljava/util/List;Ljava/util/List;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/SizeTransform;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+	public static final fun NativeTabDisplay (Ljava/util/List;Ljava/util/List;Lkotlin/jvm/functions/Function1;Landroidx/compose/ui/Modifier;Landroidx/compose/ui/Alignment;Lkotlin/jvm/functions/Function0;Ljava/util/List;Ljava/util/List;Ljava/util/List;Landroidx/compose/animation/SharedTransitionScope;Landroidx/compose/animation/SizeTransform;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function2;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;III)V
+}
+
+public final class dev/seungmin/nav3/uikit/NativeTabRoot {
+	public static final field $stable I
+	public fun <init> (Ljava/lang/Object;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/Object;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;)V
+	public final fun getIcon ()Landroidx/compose/ui/graphics/painter/Painter;
+	public final fun getKey ()Ljava/lang/Object;
+	public final fun getSystemImage ()Ljava/lang/String;
+	public final fun getTitle ()Ljava/lang/String;
+}
+
+public final class dev/seungmin/nav3/uikit/SheetDetent : java/lang/Enum {
+	public static final field Large Ldev/seungmin/nav3/uikit/SheetDetent;
+	public static final field Medium Ldev/seungmin/nav3/uikit/SheetDetent;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Ldev/seungmin/nav3/uikit/SheetDetent;
+	public static fun values ()[Ldev/seungmin/nav3/uikit/SheetDetent;
+}
+

@@ -1,0 +1,150 @@
+// Klib ABI Dump
+// Targets: [iosArm64, iosSimulatorArm64]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <dev.seungmin.nav3:nav3-uikit>
+final enum class dev.seungmin.nav3.uikit/SheetDetent : kotlin/Enum<dev.seungmin.nav3.uikit/SheetDetent> { // dev.seungmin.nav3.uikit/SheetDetent|null[0]
+    enum entry Large // dev.seungmin.nav3.uikit/SheetDetent.Large|null[0]
+    enum entry Medium // dev.seungmin.nav3.uikit/SheetDetent.Medium|null[0]
+
+    final val entries // dev.seungmin.nav3.uikit/SheetDetent.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<dev.seungmin.nav3.uikit/SheetDetent> // dev.seungmin.nav3.uikit/SheetDetent.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): dev.seungmin.nav3.uikit/SheetDetent // dev.seungmin.nav3.uikit/SheetDetent.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<dev.seungmin.nav3.uikit/SheetDetent> // dev.seungmin.nav3.uikit/SheetDetent.values|values#static(){}[0]
+}
+
+sealed interface dev.seungmin.nav3.uikit/NativePresentation { // dev.seungmin.nav3.uikit/NativePresentation|null[0]
+    final class Sheet : dev.seungmin.nav3.uikit/NativePresentation { // dev.seungmin.nav3.uikit/NativePresentation.Sheet|null[0]
+        constructor <init>(kotlin.collections/List<dev.seungmin.nav3.uikit/SheetDetent> = ..., kotlin/Boolean = ...) // dev.seungmin.nav3.uikit/NativePresentation.Sheet.<init>|<init>(kotlin.collections.List<dev.seungmin.nav3.uikit.SheetDetent>;kotlin.Boolean){}[0]
+
+        final val detents // dev.seungmin.nav3.uikit/NativePresentation.Sheet.detents|{}detents[0]
+            final fun <get-detents>(): kotlin.collections/List<dev.seungmin.nav3.uikit/SheetDetent> // dev.seungmin.nav3.uikit/NativePresentation.Sheet.detents.<get-detents>|<get-detents>(){}[0]
+        final val grabberVisible // dev.seungmin.nav3.uikit/NativePresentation.Sheet.grabberVisible|{}grabberVisible[0]
+            final fun <get-grabberVisible>(): kotlin/Boolean // dev.seungmin.nav3.uikit/NativePresentation.Sheet.grabberVisible.<get-grabberVisible>|<get-grabberVisible>(){}[0]
+
+        final fun component1(): kotlin.collections/List<dev.seungmin.nav3.uikit/SheetDetent> // dev.seungmin.nav3.uikit/NativePresentation.Sheet.component1|component1(){}[0]
+        final fun component2(): kotlin/Boolean // dev.seungmin.nav3.uikit/NativePresentation.Sheet.component2|component2(){}[0]
+        final fun copy(kotlin.collections/List<dev.seungmin.nav3.uikit/SheetDetent> = ..., kotlin/Boolean = ...): dev.seungmin.nav3.uikit/NativePresentation.Sheet // dev.seungmin.nav3.uikit/NativePresentation.Sheet.copy|copy(kotlin.collections.List<dev.seungmin.nav3.uikit.SheetDetent>;kotlin.Boolean){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // dev.seungmin.nav3.uikit/NativePresentation.Sheet.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // dev.seungmin.nav3.uikit/NativePresentation.Sheet.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // dev.seungmin.nav3.uikit/NativePresentation.Sheet.toString|toString(){}[0]
+    }
+
+    final object Push : dev.seungmin.nav3.uikit/NativePresentation { // dev.seungmin.nav3.uikit/NativePresentation.Push|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // dev.seungmin.nav3.uikit/NativePresentation.Push.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // dev.seungmin.nav3.uikit/NativePresentation.Push.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // dev.seungmin.nav3.uikit/NativePresentation.Push.toString|toString(){}[0]
+    }
+}
+
+final class <#A: out kotlin/Any> dev.seungmin.nav3.uikit/NativeTab { // dev.seungmin.nav3.uikit/NativeTab|null[0]
+    constructor <init>(kotlin.collections/List<#A>, kotlin/String, androidx.compose.ui.graphics.painter/Painter? = ..., kotlin/String? = ...) // dev.seungmin.nav3.uikit/NativeTab.<init>|<init>(kotlin.collections.List<1:0>;kotlin.String;androidx.compose.ui.graphics.painter.Painter?;kotlin.String?){}[0]
+    constructor <init>(kotlin.collections/List<#A>, kotlin/String, kotlin/String) // dev.seungmin.nav3.uikit/NativeTab.<init>|<init>(kotlin.collections.List<1:0>;kotlin.String;kotlin.String){}[0]
+
+    final val backStack // dev.seungmin.nav3.uikit/NativeTab.backStack|{}backStack[0]
+        final fun <get-backStack>(): kotlin.collections/List<#A> // dev.seungmin.nav3.uikit/NativeTab.backStack.<get-backStack>|<get-backStack>(){}[0]
+    final val icon // dev.seungmin.nav3.uikit/NativeTab.icon|{}icon[0]
+        final fun <get-icon>(): androidx.compose.ui.graphics.painter/Painter? // dev.seungmin.nav3.uikit/NativeTab.icon.<get-icon>|<get-icon>(){}[0]
+    final val systemImage // dev.seungmin.nav3.uikit/NativeTab.systemImage|{}systemImage[0]
+        final fun <get-systemImage>(): kotlin/String? // dev.seungmin.nav3.uikit/NativeTab.systemImage.<get-systemImage>|<get-systemImage>(){}[0]
+    final val title // dev.seungmin.nav3.uikit/NativeTab.title|{}title[0]
+        final fun <get-title>(): kotlin/String // dev.seungmin.nav3.uikit/NativeTab.title.<get-title>|<get-title>(){}[0]
+}
+
+final class <#A: out kotlin/Any> dev.seungmin.nav3.uikit/NativeTabRoot { // dev.seungmin.nav3.uikit/NativeTabRoot|null[0]
+    constructor <init>(#A, kotlin/String, androidx.compose.ui.graphics.painter/Painter? = ..., kotlin/String? = ...) // dev.seungmin.nav3.uikit/NativeTabRoot.<init>|<init>(1:0;kotlin.String;androidx.compose.ui.graphics.painter.Painter?;kotlin.String?){}[0]
+    constructor <init>(#A, kotlin/String, kotlin/String) // dev.seungmin.nav3.uikit/NativeTabRoot.<init>|<init>(1:0;kotlin.String;kotlin.String){}[0]
+
+    final val icon // dev.seungmin.nav3.uikit/NativeTabRoot.icon|{}icon[0]
+        final fun <get-icon>(): androidx.compose.ui.graphics.painter/Painter? // dev.seungmin.nav3.uikit/NativeTabRoot.icon.<get-icon>|<get-icon>(){}[0]
+    final val key // dev.seungmin.nav3.uikit/NativeTabRoot.key|{}key[0]
+        final fun <get-key>(): #A // dev.seungmin.nav3.uikit/NativeTabRoot.key.<get-key>|<get-key>(){}[0]
+    final val systemImage // dev.seungmin.nav3.uikit/NativeTabRoot.systemImage|{}systemImage[0]
+        final fun <get-systemImage>(): kotlin/String? // dev.seungmin.nav3.uikit/NativeTabRoot.systemImage.<get-systemImage>|<get-systemImage>(){}[0]
+    final val title // dev.seungmin.nav3.uikit/NativeTabRoot.title|{}title[0]
+        final fun <get-title>(): kotlin/String // dev.seungmin.nav3.uikit/NativeTabRoot.title.<get-title>|<get-title>(){}[0]
+}
+
+final class dev.seungmin.nav3.uikit/NativeBarButton { // dev.seungmin.nav3.uikit/NativeBarButton|null[0]
+    constructor <init>(kotlin/String, kotlin/String? = ..., kotlin/Boolean = ..., kotlin/Function0<kotlin/Unit>) // dev.seungmin.nav3.uikit/NativeBarButton.<init>|<init>(kotlin.String;kotlin.String?;kotlin.Boolean;kotlin.Function0<kotlin.Unit>){}[0]
+
+    final val enabled // dev.seungmin.nav3.uikit/NativeBarButton.enabled|{}enabled[0]
+        final fun <get-enabled>(): kotlin/Boolean // dev.seungmin.nav3.uikit/NativeBarButton.enabled.<get-enabled>|<get-enabled>(){}[0]
+    final val onClick // dev.seungmin.nav3.uikit/NativeBarButton.onClick|{}onClick[0]
+        final fun <get-onClick>(): kotlin/Function0<kotlin/Unit> // dev.seungmin.nav3.uikit/NativeBarButton.onClick.<get-onClick>|<get-onClick>(){}[0]
+    final val systemImage // dev.seungmin.nav3.uikit/NativeBarButton.systemImage|{}systemImage[0]
+        final fun <get-systemImage>(): kotlin/String? // dev.seungmin.nav3.uikit/NativeBarButton.systemImage.<get-systemImage>|<get-systemImage>(){}[0]
+    final val title // dev.seungmin.nav3.uikit/NativeBarButton.title|{}title[0]
+        final fun <get-title>(): kotlin/String // dev.seungmin.nav3.uikit/NativeBarButton.title.<get-title>|<get-title>(){}[0]
+}
+
+final object dev.seungmin.nav3.uikit/NativeNavDiagnostics { // dev.seungmin.nav3.uikit/NativeNavDiagnostics|null[0]
+    final suspend fun liveViewControllerCount(): kotlin/Int // dev.seungmin.nav3.uikit/NativeNavDiagnostics.liveViewControllerCount|liveViewControllerCount(){}[0]
+}
+
+final object dev.seungmin.nav3.uikit/NativeNavigation { // dev.seungmin.nav3.uikit/NativeNavigation|null[0]
+    final fun navigationBarHidden(): kotlin.collections/Map<kotlin/String, kotlin/Any> // dev.seungmin.nav3.uikit/NativeNavigation.navigationBarHidden|navigationBarHidden(){}[0]
+    final fun sheet(kotlin.collections/List<dev.seungmin.nav3.uikit/SheetDetent> = ..., kotlin/Boolean = ...): kotlin.collections/Map<kotlin/String, kotlin/Any> // dev.seungmin.nav3.uikit/NativeNavigation.sheet|sheet(kotlin.collections.List<dev.seungmin.nav3.uikit.SheetDetent>;kotlin.Boolean){}[0]
+    final fun tabBarHidden(): kotlin.collections/Map<kotlin/String, kotlin/Any> // dev.seungmin.nav3.uikit/NativeNavigation.tabBarHidden|tabBarHidden(){}[0]
+    final fun title(kotlin/String, kotlin/Boolean = ...): kotlin.collections/Map<kotlin/String, kotlin/Any> // dev.seungmin.nav3.uikit/NativeNavigation.title|title(kotlin.String;kotlin.Boolean){}[0]
+
+    final object LargeTitle : androidx.navigation3.runtime/NavMetadataKey<kotlin/Boolean> { // dev.seungmin.nav3.uikit/NativeNavigation.LargeTitle|null[0]
+        final fun toString(): kotlin/String // dev.seungmin.nav3.uikit/NativeNavigation.LargeTitle.toString|toString(){}[0]
+    }
+
+    final object NavigationBarHidden : androidx.navigation3.runtime/NavMetadataKey<kotlin/Boolean> { // dev.seungmin.nav3.uikit/NativeNavigation.NavigationBarHidden|null[0]
+        final fun toString(): kotlin/String // dev.seungmin.nav3.uikit/NativeNavigation.NavigationBarHidden.toString|toString(){}[0]
+    }
+
+    final object Presentation : androidx.navigation3.runtime/NavMetadataKey<dev.seungmin.nav3.uikit/NativePresentation> { // dev.seungmin.nav3.uikit/NativeNavigation.Presentation|null[0]
+        final fun toString(): kotlin/String // dev.seungmin.nav3.uikit/NativeNavigation.Presentation.toString|toString(){}[0]
+    }
+
+    final object TabBarHidden : androidx.navigation3.runtime/NavMetadataKey<kotlin/Boolean> { // dev.seungmin.nav3.uikit/NativeNavigation.TabBarHidden|null[0]
+        final fun toString(): kotlin/String // dev.seungmin.nav3.uikit/NativeNavigation.TabBarHidden.toString|toString(){}[0]
+    }
+
+    final object Title : androidx.navigation3.runtime/NavMetadataKey<kotlin/String> { // dev.seungmin.nav3.uikit/NativeNavigation.Title|null[0]
+        final fun toString(): kotlin/String // dev.seungmin.nav3.uikit/NativeNavigation.Title.toString|toString(){}[0]
+    }
+}
+
+final val dev.seungmin.nav3.uikit/LocalNativeNavigationBar // dev.seungmin.nav3.uikit/LocalNativeNavigationBar|{}LocalNativeNavigationBar[0]
+    final fun <get-LocalNativeNavigationBar>(): androidx.compose.runtime/CompositionLocal<kotlin/Boolean> // dev.seungmin.nav3.uikit/LocalNativeNavigationBar.<get-LocalNativeNavigationBar>|<get-LocalNativeNavigationBar>(){}[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_EntryNavigationItem_Request$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_EntryNavigationItem_Request$stableprop|#static{}dev_seungmin_nav3_uikit_EntryNavigationItem_Request$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeBarButton$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeBarButton$stableprop|#static{}dev_seungmin_nav3_uikit_NativeBarButton$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavDiagnostics$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavDiagnostics$stableprop|#static{}dev_seungmin_nav3_uikit_NativeNavDiagnostics$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation$stableprop|#static{}dev_seungmin_nav3_uikit_NativeNavigation$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_LargeTitle$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_LargeTitle$stableprop|#static{}dev_seungmin_nav3_uikit_NativeNavigation_LargeTitle$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_NavigationBarHidden$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_NavigationBarHidden$stableprop|#static{}dev_seungmin_nav3_uikit_NativeNavigation_NavigationBarHidden$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_Presentation$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_Presentation$stableprop|#static{}dev_seungmin_nav3_uikit_NativeNavigation_Presentation$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_TabBarHidden$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_TabBarHidden$stableprop|#static{}dev_seungmin_nav3_uikit_NativeNavigation_TabBarHidden$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_Title$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_Title$stableprop|#static{}dev_seungmin_nav3_uikit_NativeNavigation_Title$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativePresentation_Push$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativePresentation_Push$stableprop|#static{}dev_seungmin_nav3_uikit_NativePresentation_Push$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativePresentation_Sheet$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativePresentation_Sheet$stableprop|#static{}dev_seungmin_nav3_uikit_NativePresentation_Sheet$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeTab$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeTab$stableprop|#static{}dev_seungmin_nav3_uikit_NativeTab$stableprop[0]
+final val dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeTabRoot$stableprop // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeTabRoot$stableprop|#static{}dev_seungmin_nav3_uikit_NativeTabRoot$stableprop[0]
+
+final fun <#A: kotlin/Any> dev.seungmin.nav3.uikit/NativeNavDisplay(kotlin.collections/List<#A>, androidx.compose.ui/Modifier?, androidx.compose.ui/Alignment?, kotlin/Function0<kotlin/Unit>?, kotlin.collections/List<androidx.navigation3.runtime/NavEntryDecorator<#A>>?, kotlin.collections/List<androidx.navigation3.scene/SceneStrategy<#A>>?, kotlin.collections/List<androidx.navigation3.scene/SceneDecoratorStrategy<#A>>?, androidx.compose.animation/SharedTransitionScope?, androidx.compose.animation/SizeTransform?, kotlin/Function1<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, androidx.compose.animation/ContentTransform>?, kotlin/Function1<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, androidx.compose.animation/ContentTransform>?, kotlin/Function2<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, kotlin/Int, androidx.compose.animation/ContentTransform>?, kotlin/Function1<#A, androidx.navigation3.runtime/NavEntry<#A>>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // dev.seungmin.nav3.uikit/NativeNavDisplay|NativeNavDisplay(kotlin.collections.List<0:0>;androidx.compose.ui.Modifier?;androidx.compose.ui.Alignment?;kotlin.Function0<kotlin.Unit>?;kotlin.collections.List<androidx.navigation3.runtime.NavEntryDecorator<0:0>>?;kotlin.collections.List<androidx.navigation3.scene.SceneStrategy<0:0>>?;kotlin.collections.List<androidx.navigation3.scene.SceneDecoratorStrategy<0:0>>?;androidx.compose.animation.SharedTransitionScope?;androidx.compose.animation.SizeTransform?;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,androidx.compose.animation.ContentTransform>?;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,androidx.compose.animation.ContentTransform>?;kotlin.Function2<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,kotlin.Int,androidx.compose.animation.ContentTransform>?;kotlin.Function1<0:0,androidx.navigation3.runtime.NavEntry<0:0>>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){0§<kotlin.Any>}[0]
+final fun <#A: kotlin/Any> dev.seungmin.nav3.uikit/NativeNavDisplay(kotlin.collections/List<androidx.navigation3.runtime/NavEntry<#A>>, androidx.compose.ui/Modifier?, androidx.compose.ui/Alignment?, kotlin.collections/List<androidx.navigation3.scene/SceneStrategy<#A>>?, kotlin.collections/List<androidx.navigation3.scene/SceneDecoratorStrategy<#A>>?, androidx.compose.animation/SharedTransitionScope?, androidx.compose.animation/SizeTransform?, kotlin/Function1<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, androidx.compose.animation/ContentTransform>?, kotlin/Function1<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, androidx.compose.animation/ContentTransform>?, kotlin/Function2<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, kotlin/Int, androidx.compose.animation/ContentTransform>?, kotlin/Function0<kotlin/Unit>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // dev.seungmin.nav3.uikit/NativeNavDisplay|NativeNavDisplay(kotlin.collections.List<androidx.navigation3.runtime.NavEntry<0:0>>;androidx.compose.ui.Modifier?;androidx.compose.ui.Alignment?;kotlin.collections.List<androidx.navigation3.scene.SceneStrategy<0:0>>?;kotlin.collections.List<androidx.navigation3.scene.SceneDecoratorStrategy<0:0>>?;androidx.compose.animation.SharedTransitionScope?;androidx.compose.animation.SizeTransform?;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,androidx.compose.animation.ContentTransform>?;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,androidx.compose.animation.ContentTransform>?;kotlin.Function2<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,kotlin.Int,androidx.compose.animation.ContentTransform>?;kotlin.Function0<kotlin.Unit>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){0§<kotlin.Any>}[0]
+final fun <#A: kotlin/Any> dev.seungmin.nav3.uikit/NativeTabDisplay(kotlin.collections/List<#A>, kotlin.collections/List<dev.seungmin.nav3.uikit/NativeTabRoot<#A>>, kotlin/Function1<#A, kotlin/Unit>, androidx.compose.ui/Modifier?, androidx.compose.ui/Alignment?, kotlin/Function0<kotlin/Unit>?, kotlin.collections/List<androidx.navigation3.runtime/NavEntryDecorator<#A>>?, kotlin.collections/List<androidx.navigation3.scene/SceneStrategy<#A>>?, kotlin.collections/List<androidx.navigation3.scene/SceneDecoratorStrategy<#A>>?, androidx.compose.animation/SharedTransitionScope?, androidx.compose.animation/SizeTransform?, kotlin/Function1<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, androidx.compose.animation/ContentTransform>?, kotlin/Function1<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, androidx.compose.animation/ContentTransform>?, kotlin/Function2<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, kotlin/Int, androidx.compose.animation/ContentTransform>?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, kotlin/Function1<#A, androidx.navigation3.runtime/NavEntry<#A>>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // dev.seungmin.nav3.uikit/NativeTabDisplay|NativeTabDisplay(kotlin.collections.List<0:0>;kotlin.collections.List<dev.seungmin.nav3.uikit.NativeTabRoot<0:0>>;kotlin.Function1<0:0,kotlin.Unit>;androidx.compose.ui.Modifier?;androidx.compose.ui.Alignment?;kotlin.Function0<kotlin.Unit>?;kotlin.collections.List<androidx.navigation3.runtime.NavEntryDecorator<0:0>>?;kotlin.collections.List<androidx.navigation3.scene.SceneStrategy<0:0>>?;kotlin.collections.List<androidx.navigation3.scene.SceneDecoratorStrategy<0:0>>?;androidx.compose.animation.SharedTransitionScope?;androidx.compose.animation.SizeTransform?;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,androidx.compose.animation.ContentTransform>?;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,androidx.compose.animation.ContentTransform>?;kotlin.Function2<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,kotlin.Int,androidx.compose.animation.ContentTransform>?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function1<0:0,androidx.navigation3.runtime.NavEntry<0:0>>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){0§<kotlin.Any>}[0]
+final fun <#A: kotlin/Any> dev.seungmin.nav3.uikit/NativeTabDisplay(kotlin.collections/List<dev.seungmin.nav3.uikit/NativeTab<#A>>, kotlin/Int, kotlin/Function1<kotlin/Int, kotlin/Unit>, androidx.compose.ui/Modifier?, androidx.compose.ui/Alignment?, kotlin/Function1<kotlin/Int, kotlin/Unit>?, kotlin.collections/List<androidx.navigation3.runtime/NavEntryDecorator<#A>>?, kotlin.collections/List<androidx.navigation3.scene/SceneStrategy<#A>>?, kotlin.collections/List<androidx.navigation3.scene/SceneDecoratorStrategy<#A>>?, androidx.compose.animation/SharedTransitionScope?, androidx.compose.animation/SizeTransform?, kotlin/Function1<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, androidx.compose.animation/ContentTransform>?, kotlin/Function1<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, androidx.compose.animation/ContentTransform>?, kotlin/Function2<androidx.compose.animation/AnimatedContentTransitionScope<androidx.navigation3.scene/Scene<#A>>, kotlin/Int, androidx.compose.animation/ContentTransform>?, kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>?, kotlin/Function1<#A, androidx.navigation3.runtime/NavEntry<#A>>, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int, kotlin/Int) // dev.seungmin.nav3.uikit/NativeTabDisplay|NativeTabDisplay(kotlin.collections.List<dev.seungmin.nav3.uikit.NativeTab<0:0>>;kotlin.Int;kotlin.Function1<kotlin.Int,kotlin.Unit>;androidx.compose.ui.Modifier?;androidx.compose.ui.Alignment?;kotlin.Function1<kotlin.Int,kotlin.Unit>?;kotlin.collections.List<androidx.navigation3.runtime.NavEntryDecorator<0:0>>?;kotlin.collections.List<androidx.navigation3.scene.SceneStrategy<0:0>>?;kotlin.collections.List<androidx.navigation3.scene.SceneDecoratorStrategy<0:0>>?;androidx.compose.animation.SharedTransitionScope?;androidx.compose.animation.SizeTransform?;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,androidx.compose.animation.ContentTransform>?;kotlin.Function1<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,androidx.compose.animation.ContentTransform>?;kotlin.Function2<androidx.compose.animation.AnimatedContentTransitionScope<androidx.navigation3.scene.Scene<0:0>>,kotlin.Int,androidx.compose.animation.ContentTransform>?;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>?;kotlin.Function1<0:0,androidx.navigation3.runtime.NavEntry<0:0>>;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int;kotlin.Int){0§<kotlin.Any>}[0]
+final fun dev.seungmin.nav3.uikit/NativeNavigationBarItems(kotlin/String?, kotlin.collections/List<dev.seungmin.nav3.uikit/NativeBarButton>?, androidx.compose.runtime/Composer?, kotlin/Int, kotlin/Int) // dev.seungmin.nav3.uikit/NativeNavigationBarItems|NativeNavigationBarItems(kotlin.String?;kotlin.collections.List<dev.seungmin.nav3.uikit.NativeBarButton>?;androidx.compose.runtime.Composer?;kotlin.Int;kotlin.Int){}[0]
+final fun dev.seungmin.nav3.uikit/NativeNavigationViewController(kotlin/Function1<androidx.compose.ui.uikit/ComposeUIViewControllerConfiguration, kotlin/Unit> = ..., kotlin/Function2<androidx.compose.runtime/Composer, kotlin/Int, kotlin/Unit>): platform.UIKit/UIViewController // dev.seungmin.nav3.uikit/NativeNavigationViewController|NativeNavigationViewController(kotlin.Function1<androidx.compose.ui.uikit.ComposeUIViewControllerConfiguration,kotlin.Unit>;kotlin.Function2<androidx.compose.runtime.Composer,kotlin.Int,kotlin.Unit>){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_EntryNavigationItem_Request$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_EntryNavigationItem_Request$stableprop_getter|dev_seungmin_nav3_uikit_EntryNavigationItem_Request$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeBarButton$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeBarButton$stableprop_getter|dev_seungmin_nav3_uikit_NativeBarButton$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavDiagnostics$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavDiagnostics$stableprop_getter|dev_seungmin_nav3_uikit_NativeNavDiagnostics$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation$stableprop_getter|dev_seungmin_nav3_uikit_NativeNavigation$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_LargeTitle$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_LargeTitle$stableprop_getter|dev_seungmin_nav3_uikit_NativeNavigation_LargeTitle$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_NavigationBarHidden$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_NavigationBarHidden$stableprop_getter|dev_seungmin_nav3_uikit_NativeNavigation_NavigationBarHidden$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_Presentation$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_Presentation$stableprop_getter|dev_seungmin_nav3_uikit_NativeNavigation_Presentation$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_TabBarHidden$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_TabBarHidden$stableprop_getter|dev_seungmin_nav3_uikit_NativeNavigation_TabBarHidden$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_Title$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeNavigation_Title$stableprop_getter|dev_seungmin_nav3_uikit_NativeNavigation_Title$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativePresentation_Push$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativePresentation_Push$stableprop_getter|dev_seungmin_nav3_uikit_NativePresentation_Push$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativePresentation_Sheet$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativePresentation_Sheet$stableprop_getter|dev_seungmin_nav3_uikit_NativePresentation_Sheet$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeTab$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeTab$stableprop_getter|dev_seungmin_nav3_uikit_NativeTab$stableprop_getter(){}[0]
+final fun dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeTabRoot$stableprop_getter(): kotlin/Int // dev.seungmin.nav3.uikit/dev_seungmin_nav3_uikit_NativeTabRoot$stableprop_getter|dev_seungmin_nav3_uikit_NativeTabRoot$stableprop_getter(){}[0]

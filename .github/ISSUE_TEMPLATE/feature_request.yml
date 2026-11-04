@@ -1,0 +1,34 @@
+name: Feature request
+description: A native behavior or API that nav3-uikit does not support yet.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What does the app need to do, and what stops it today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API or behavior
+      description: How it could look from the app's code, and how UIKit does it natively, if it does.
+      render: kotlin
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives and workarounds
+      description: What the app does today instead.
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platforms affected
+      multiple: true
+      options:
+        - iOS
+        - Android
+        - JVM desktop

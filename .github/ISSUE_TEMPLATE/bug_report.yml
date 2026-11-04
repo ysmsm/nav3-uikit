@@ -1,0 +1,109 @@
+name: Bug report
+description: Something in nav3-uikit behaves differently from NavDisplay, UIKit, or the documentation.
+labels: [bug, needs-triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check that the bug still happens on the [latest version](https://central.sonatype.com/artifact/dev.seungmin.nav3/nav3-uikit). If it also happens with a plain `NavDisplay` and no nav3-uikit, it belongs to [Compose Multiplatform](https://youtrack.jetbrains.com/newIssue?project=CMP) instead. Questions go to [Discussions](https://github.com/ysmsm/nav3-uikit/discussions).
+
+  - type: input
+    id: version
+    attributes:
+      label: nav3-uikit version
+      placeholder: 0.1.0-dev01
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      multiple: true
+      options:
+        - iOS
+        - Android
+        - JVM desktop
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: OS version
+      placeholder: iOS 26.5
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: Device or simulator
+      placeholder: iPhone 17 simulator, iPhone 16 Pro, iPhone Duo (open)
+    validations:
+      required: true
+
+  - type: input
+    id: dependencies
+    attributes:
+      label: Kotlin, Compose Multiplatform, and Navigation 3 versions
+      placeholder: Kotlin 2.4.20, Compose Multiplatform 1.12.1, Navigation 3 1.1.2
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Push a screen whose entry uses NavigationBackHandler
+        2. Swipe from the left edge
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproducer
+    attributes:
+      label: Minimal reproducer
+      description: A code snippet, a link to a small project, or the `NAV3_SAMPLE` sample in this repository that shows the bug.
+      render: kotlin
+    validations:
+      required: true
+
+  - type: textarea
+    id: other-environments
+    attributes:
+      label: Other OS versions or devices tried
+      description: Does it work on another OS version, device, or with a plain NavDisplay?
+
+  - type: input
+    id: last-working
+    attributes:
+      label: Last version that worked
+      placeholder: N/A
+
+  - type: textarea
+    id: recording
+    attributes:
+      label: Screen recording or screenshots
+      description: Gesture and animation bugs are much easier to diagnose with a recording. Drag the file here.
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      render: shell

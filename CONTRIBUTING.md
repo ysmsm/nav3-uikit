@@ -24,6 +24,8 @@ Building needs JDK 21, the Android SDK, Xcode, and XcodeGen. The Kotlin, Compose
 ```sh
 ./gradlew :nav3-uikit:compileKotlinIosSimulatorArm64 :nav3-uikit:compileKotlinJvm :nav3-uikit:compileAndroidMain
 ./gradlew :nav3-uikit:jvmTest          # unit tests of how a single back stack is split into tabs
+./gradlew :nav3-uikit:checkKotlinAbi   # fails when the public API differs from nav3-uikit/api
+./gradlew :nav3-uikit:updateKotlinAbi  # rewrites nav3-uikit/api after an intended API change
 ./gradlew :nav3-uikit:publishToMavenLocal
 ```
 
@@ -71,4 +73,8 @@ Kotlin/Native's garbage collector cannot collect reference cycles that pass thro
 
 ## Pull requests
 
-Fork the repository, make the change on a branch, and open a pull request against `main`. CI compiles the library for every target and runs `jvmTest`. It does not run the UI tests, so for a change to the iOS code, run them as described in [UI tests](#ui-tests) on a regular iPhone simulator and mention the result in the pull request.
+Fork the repository, make the change on a branch, and open a pull request against `main`. Open an issue first for a change to the public API or to behavior that apps rely on, so the approach can be agreed before the work. A bug fix should come with a test that fails without it, where the bug can be tested.
+
+CI compiles the library for every target, runs `jvmTest`, and runs `checkKotlinAbi`. A pull request that changes the public API commits the new dump from `updateKotlinAbi`, so the change shows up in review. CI does not run the UI tests, because they take about 30 minutes. For a change to the iOS code, run them as described in [UI tests](#ui-tests) on a regular iPhone simulator and mention the result in the pull request; the maintainer can also run the [UI tests](https://github.com/ysmsm/nav3-uikit/actions/workflows/ui-tests.yml) workflow on GitHub.
+
+A change that users will notice adds a line under **Unreleased** in `CHANGELOG.md`. Pull requests are squash-merged, so the pull request title becomes the commit message.

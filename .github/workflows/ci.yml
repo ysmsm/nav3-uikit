@@ -25,3 +25,4 @@ jobs:
           :nav3-uikit:compileKotlinJvm
           :nav3-uikit:compileAndroidMain
           :nav3-uikit:jvmTest
+          :nav3-uikit:checkKotlinAbi
