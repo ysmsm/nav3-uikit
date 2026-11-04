@@ -82,9 +82,8 @@ final class NativeNavigationUITests: SampleUITestCase {
     func testInteractiveSwipeCancelKeepsEntry() {
         tap("Open detail 1")
         expectBackStack("Home > Detail(id=1)")
-        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.5))
-        let partway = app.coordinate(withNormalizedOffset: CGVector(dx: 0.2, dy: 0.5))
-        start.press(forDuration: 0.05, thenDragTo: partway, withVelocity: .slow, thenHoldForDuration: 0.5)
+        let partway = midHeight(x: app.frame.width * 0.2)
+        edgeSwipeStart.press(forDuration: 0.05, thenDragTo: partway, withVelocity: .slow, thenHoldForDuration: 0.5)
         expectBackStack("Home > Detail(id=1)")
         XCTAssertTrue(app.navigationBars["Detail 1"].waitForExistence(timeout: 5))
         tap("ViewModel taps: 0")
