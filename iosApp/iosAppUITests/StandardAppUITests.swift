@@ -37,13 +37,18 @@ class SampleUITestCase: XCTestCase {
         target.tap()
     }
 
+    /// Passes when any element with `label` can be hit. Screens below the top one can show the
+    /// same label: iOS 18 keeps a sheet covered by another sheet in the accessibility tree, and
+    /// every screen of the sample prints the same back stack.
     func expectVisible(_ label: String, file: StaticString = #filePath, line: UInt = #line) {
-        let predicate = NSPredicate(format: "exists == true AND hittable == true")
-        let match = expectation(for: predicate, evaluatedWith: element(label))
-        if XCTWaiter().wait(for: [match], timeout: 5) != .completed {
-            snapshot("failure")
-            XCTFail("expected visible \(label)", file: file, line: line)
-        }
+        let matches = app.descendants(matching: .any).matching(NSPredicate(format: "label == %@", label))
+        let deadline = Date().addingTimeInterval(5)
+        repeat {
+            if matches.allElementsBoundByIndex.contains(where: { $0.exists && $0.isHittable }) { return }
+            usleep(200_000)
+        } while Date() < deadline
+        snapshot("failure")
+        XCTFail("expected visible \(label)", file: file, line: line)
     }
 
     func expectBackStack(_ expected: String, file: StaticString = #filePath, line: UInt = #line) {
@@ -68,10 +73,18 @@ class SampleUITestCase: XCTestCase {
         }
     }
 
+    /// A point at mid-height, `x` points from the left edge of the screen.
+    func midHeight(x: CGFloat) -> XCUICoordinate {
+        app.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: x, dy: app.frame.height / 2))
+    }
+
+    /// Where an edge swipe starts. A synthesized drag starts an edge swipe only when it begins
+    /// within about 4 pt of the screen edge, and the limit differs by device: 3.9 pt misses on an
+    /// iPhone 17e or iPhone 12 Pro. So this is 1 pt in, not a fraction of the width.
+    var edgeSwipeStart: XCUICoordinate { midHeight(x: 1) }
+
     func edgeSwipeBack() {
-        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.01, dy: 0.5))
-        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5))
-        start.press(forDuration: 0.05, thenDragTo: end)
+        edgeSwipeStart.press(forDuration: 0.05, thenDragTo: midHeight(x: app.frame.width * 0.9))
     }
 
     /// Waits for UIKit transitions that the test cannot observe through labels to finish.
