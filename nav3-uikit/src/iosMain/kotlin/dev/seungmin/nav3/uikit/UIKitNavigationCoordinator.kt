@@ -37,6 +37,8 @@ internal class UIKitNavigationCoordinator<T : Any>(
     configure: ComposeUIViewControllerConfiguration.() -> Unit,
     private val onBack: () -> Unit,
     private val onNativeChange: () -> Unit,
+    /** Called after the top pushed entry or what it asks of the bars may have changed. */
+    private val onTopChromeChanged: () -> Unit = {},
 ) {
     val navigationController: UINavigationController =
         ContainerNavigationController(onAppear = weakly(this) { it.onContainerAppeared() })
@@ -68,6 +70,14 @@ internal class UIKitNavigationCoordinator<T : Any>(
     private var waitingForWindow = false
     private var hasApplied = false
     private var disposed = false
+
+    /** Whether the top pushed entry hides the tab bar with [NativeTabBarHidden]. */
+    val topRequestsTabBarHidden: Boolean
+        get() = stack.lastOrNull()?.requestsTabBarHidden == true
+
+    /** Whether UIKit hides the tab bar for the top pushed entry, from its metadata. */
+    val topHidesTabBarWhenPushed: Boolean
+        get() = stack.size > 1 && stack.last().hidesTabBarWhenPushed
 
     // The full-width content swipe exists from iOS 26.
     @OptIn(ExperimentalForeignApi::class)
@@ -256,6 +266,7 @@ internal class UIKitNavigationCoordinator<T : Any>(
                 navigationController.setNavigationBarHidden(hidden, animated = hasApplied)
             }
         }
+        onTopChromeChanged()
     }
 
     fun onBackButton(host: EntryHost<T>) {
@@ -288,7 +299,7 @@ private fun <E> MutableList<E>.removeFrom(index: Int): List<E> {
 
 // Top-level functions so the blocks UIKit and hosted content keep capture only weak references.
 @OptIn(ExperimentalNativeApi::class)
-private fun <C : Any> weakly(target: C, action: (C) -> Unit): () -> Unit {
+internal fun <C : Any> weakly(target: C, action: (C) -> Unit): () -> Unit {
     val weak = WeakReference(target)
     return { weak.value?.let(action) }
 }

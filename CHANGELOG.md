@@ -4,6 +4,11 @@ Every user-visible change to `dev.seungmin.nav3:nav3-uikit` is recorded here, in
 
 ## [Unreleased]
 
+### Added
+
+- `badge` on `NativeTab` and `NativeTabRoot`, shown as the tab's `badgeValue` on iOS and in the default tab bar elsewhere ([#7](https://github.com/ysmsm/nav3-uikit/issues/7)).
+- `NativeTabBarHidden`, which hides the tab bar of `NativeTabDisplay` from a screen's state ([#7](https://github.com/ysmsm/nav3-uikit/issues/7)).
+
 ## [0.1.0-dev01] - 2026-10-17
 
 The first public build on Maven Central. The API is experimental and may change in any `0.x` release.

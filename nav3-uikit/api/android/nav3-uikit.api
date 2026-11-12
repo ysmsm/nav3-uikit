@@ -91,13 +91,19 @@ public final class dev/seungmin/nav3/uikit/NativePresentation$Sheet : dev/seungm
 
 public final class dev/seungmin/nav3/uikit/NativeTab {
 	public static final field $stable I
-	public fun <init> (Ljava/util/List;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;)V
-	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;)V
+	public fun <init> (Ljava/util/List;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getBackStack ()Ljava/util/List;
+	public final fun getBadge ()Ljava/lang/String;
 	public final fun getIcon ()Landroidx/compose/ui/graphics/painter/Painter;
 	public final fun getSystemImage ()Ljava/lang/String;
 	public final fun getTitle ()Ljava/lang/String;
+}
+
+public final class dev/seungmin/nav3/uikit/NativeTabBarHiddenKt {
+	public static final fun NativeTabBarHidden (ZLandroidx/compose/runtime/Composer;II)V
 }
 
 public final class dev/seungmin/nav3/uikit/NativeTabDisplayKt {
@@ -107,9 +113,11 @@ public final class dev/seungmin/nav3/uikit/NativeTabDisplayKt {
 
 public final class dev/seungmin/nav3/uikit/NativeTabRoot {
 	public static final field $stable I
-	public fun <init> (Ljava/lang/Object;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;)V
-	public synthetic fun <init> (Ljava/lang/Object;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public fun <init> (Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;)V
+	public fun <init> (Ljava/lang/Object;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/Object;Ljava/lang/String;Landroidx/compose/ui/graphics/painter/Painter;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/Object;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getBadge ()Ljava/lang/String;
 	public final fun getIcon ()Landroidx/compose/ui/graphics/painter/Painter;
 	public final fun getKey ()Ljava/lang/Object;
 	public final fun getSystemImage ()Ljava/lang/String;
