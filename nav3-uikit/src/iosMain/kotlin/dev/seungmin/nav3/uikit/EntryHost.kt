@@ -46,7 +46,7 @@ internal class ParentLocals(initial: CompositionLocalContext) {
 internal class HostEnvironment(
     val parentLocals: ParentLocals,
     val configure: ComposeUIViewControllerConfiguration.() -> Unit,
-    /** An entry's back handlers or navigation bar request changed. */
+    /** An entry's back handlers, navigation bar request, or tab bar request changed. */
     val onEntryChromeChanged: () -> Unit,
 )
 
@@ -95,6 +95,14 @@ internal class EntryHost<T : Any>(
      */
     val interceptsBack: Boolean
         get() = content.backInput.hasEnabledHandlers
+
+    /** Whether the entry's content hides the tab bar with [NativeTabBarHidden]. */
+    val requestsTabBarHidden: Boolean
+        get() = content.tabBarRequests.hidden
+
+    /** Whether [NativeNavigation.tabBarHidden] metadata hides the tab bar while the entry is pushed. */
+    val hidesTabBarWhenPushed: Boolean
+        get() = viewController.hidesBottomBarWhenPushed
 
     fun dispatchBack() {
         content.backInput.back()
@@ -169,6 +177,7 @@ private class EntryContent<T : Any>(
     var pushed by mutableStateOf(true)
     var navigationItem: EntryNavigationItem? = null
     val backInput = EntryBackInput().apply { onChanged = environment.onEntryChromeChanged }
+    val tabBarRequests = TabBarHiddenRequests(environment.onEntryChromeChanged)
 
     val navigationBarAvailable: Boolean
         get() = pushed && entry.metadata[NativeNavigation.NavigationBarHidden] != true
@@ -219,6 +228,7 @@ private fun <T : Any> hostedController(
                 CompositionLocalProvider(
                     LocalNativeNavigationBarAvailable provides content.navigationBarAvailable,
                     LocalEntryNavigationItem provides content.navigationItem,
+                    LocalTabBarHiddenRequests provides content.tabBarRequests,
                 ) {
                     val dispatcherOwner = LocalNavigationEventDispatcherOwner.current
                     DisposableEffect(dispatcherOwner) {

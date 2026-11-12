@@ -33,7 +33,7 @@ Rename `NavDisplay` to `NativeNavDisplay` and your iOS screens run in a real `UI
 
 - **Drop-in for `NavDisplay`.** `NativeNavDisplay` has both overloads (`backStack` and `entries`) and every parameter of `NavDisplay`. Decorators, `sceneStrategies`, `DialogSceneStrategy`, and back handlers keep working.
 - **Native stack on iOS.** Each entry is its own `ComposeUIViewController` in a `UINavigationController`, so the back button, edge swipe-back, and the back button's history menu are UIKit's own.
-- **Native tabs on iOS.** `NativeTabDisplay` shows a `UITabBarController` with a navigation stack per tab. It accepts either the single back stack of Navigation 3's `commonui` recipe or one back stack per tab.
+- **Native tabs on iOS.** `NativeTabDisplay` shows a `UITabBarController` with a navigation stack per tab and tab badges. It accepts either the single back stack of Navigation 3's `commonui` recipe or one back stack per tab.
 - **Sheets, titles, and bar buttons from metadata.** Entries opt into a large title, a sheet with medium or large detents, or a hidden navigation bar or tab bar. Screens can set the title and trailing buttons from their content.
 - **Back stack stays the source of truth.** Native pops call `onBack`. If the app refuses a pop, the screen is put back.
 - **iPhone Duo ready.** The tab bar and the back button move into the iPhone Duo vertical bar, laid out by UIKit itself.
@@ -158,9 +158,28 @@ NativeTabDisplay(
 
 With one back stack per tab, every tab keeps its `rememberSaveable` state and ViewModels while it is hidden. An app that wants to keep its Compose tab bar can use `NativeNavDisplay` alone; the tab bar then stays a Compose view and does not move into the iPhone Duo vertical bar.
 
+### Badges and a hidden tab bar
+
+`badge` puts a badge on a tab, such as an unread count. On iOS it is the tab's `badgeValue`, so UIKit draws the badge and only its text is up to the app.
+
+```kotlin
+NativeTab(messages, "Messages", icon = "message", badge = unread.takeIf { it > 0 }?.toString())
+```
+
+A screen hides the tab bar from its own state with `NativeTabBarHidden`. The tab bar comes back when the state changes or the screen is popped. A screen that always hides the tab bar uses `NativeNavigation.tabBarHidden()` metadata instead, which also hides it during the push.
+
+```kotlin
+@Composable
+fun DetailScreen() {
+    var expanded by remember { mutableStateOf(false) }
+    NativeTabBarHidden(hidden = expanded)
+    // ...
+}
+```
+
 ## On Android and desktop
 
-`NativeNavDisplay` passes every parameter to `NavDisplay`. `NativeTabDisplay` shows a `NavDisplay` above its `tabBar` slot, which defaults to a plain row of tab icons and titles; pass the app's own tab bar there. Back behaves as before: the single back stack overload follows the back stack exactly, and the per-tab overload returns to the first tab from the root of any other tab.
+`NativeNavDisplay` passes every parameter to `NavDisplay`. `NativeTabDisplay` shows a `NavDisplay` above its `tabBar` slot, which defaults to a plain row of tab icons, titles, and badges; pass the app's own tab bar there. The slot is hidden while a screen calls `NativeTabBarHidden`. Back behaves as before: the single back stack overload follows the back stack exactly, and the per-tab overload returns to the first tab from the root of any other tab.
 
 ## Compatibility
 

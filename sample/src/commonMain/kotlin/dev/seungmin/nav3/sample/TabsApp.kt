@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -25,6 +26,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import dev.seungmin.nav3.uikit.NativeNavigation
 import dev.seungmin.nav3.uikit.NativeTab
+import dev.seungmin.nav3.uikit.NativeTabBarHidden
 import dev.seungmin.nav3.uikit.NativeTabDisplay
 import dev.seungmin.nav3.uikit.SheetDetent
 import kotlinx.serialization.Serializable
@@ -36,6 +38,9 @@ expect fun verticalBarEdge(): String?
 /** A screen pushed with the tab bar hidden. */
 @Serializable data object Focus : Route
 
+/** A pushed screen that hides the tab bar from its state. */
+@Serializable data object Panel : Route
+
 /** [onSignOut], when set, adds a Sign out button to the Home tab. */
 @Composable
 fun TabsApp(onSignOut: (() -> Unit)? = null) {
@@ -45,6 +50,7 @@ fun TabsApp(onSignOut: (() -> Unit)? = null) {
         val profile = rememberNavBackStack(config, Profile)
         val backStacks = listOf(home, search, profile)
         var selected by rememberSaveable { mutableIntStateOf(0) }
+        var homeBadge by rememberSaveable { mutableIntStateOf(0) }
         // Only the selected tab can be interacted with, so screens act on its back stack.
         val current: NavBackStack<NavKey> = backStacks[selected]
         val describe = { stack: List<NavKey> -> stack.joinToString(" > ") }
@@ -52,7 +58,7 @@ fun TabsApp(onSignOut: (() -> Unit)? = null) {
 
         NativeTabDisplay(
             tabs = listOf(
-                NativeTab(home, "Home", icon = "house"),
+                NativeTab(home, "Home", icon = "house", badge = homeBadge.takeIf { it > 0 }?.toString()),
                 NativeTab(search, "Search", icon = "magnifyingglass"),
                 NativeTab(profile, "Profile", icon = "person.crop.circle"),
             ),
@@ -89,12 +95,16 @@ fun TabsApp(onSignOut: (() -> Unit)? = null) {
                     TabScreen(names[selected], describe(current)) {
                         Button("Open detail 1") { current += Detail(1) }
                         Button("Open detail 2") { current += Detail(2) }
+                        Button("Add Home badge") { homeBadge++ }
+                        Button("Clear Home badge") { homeBadge = 0 }
                     }
                 }
                 entry<Profile>(metadata = NativeNavigation.title("Profile", large = true)) {
                     TabScreen(names[selected], describe(current)) {
                         Button("Go to Home tab") { selected = 0 }
                         Button("Open immersive") { current += Immersive }
+                        Button("Open panel") { current += Panel }
+                        ExpandControls()
                     }
                 }
                 entry<Detail>(metadata = { NativeNavigation.title("Detail ${it.id}") }) { key ->
@@ -118,6 +128,12 @@ fun TabsApp(onSignOut: (() -> Unit)? = null) {
                         BasicText("Tab bar hidden here", style = TextStyle(fontSize = 22.sp))
                     }
                 }
+                entry<Panel>(metadata = NativeNavigation.title("Panel")) {
+                    TabScreen(names[selected], describe(current)) {
+                        ExpandControls()
+                        Button("Open focus") { current += Focus }
+                    }
+                }
                 entry<Immersive>(metadata = NativeNavigation.navigationBarHidden()) {
                     TabScreen(names[selected], describe(current)) {
                         BasicText("No navigation bar here", style = TextStyle(fontSize = 22.sp))
@@ -127,6 +143,14 @@ fun TabsApp(onSignOut: (() -> Unit)? = null) {
             },
         )
     }
+}
+
+/** A toggle that hides the tab bar while it is expanded. */
+@Composable
+private fun ExpandControls() {
+    var expanded by rememberSaveable { mutableStateOf(false) }
+    NativeTabBarHidden(hidden = expanded)
+    Button(if (expanded) "Collapse" else "Expand") { expanded = !expanded }
 }
 
 /** [Screen] plus the insets and vertical bar edge the screen sees, for checking iPhone Duo. */

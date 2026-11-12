@@ -11,7 +11,10 @@ import platform.UIKit.UITab
 import platform.UIKit.UITabBarController
 import platform.UIKit.UITabBarControllerDelegateProtocol
 import platform.UIKit.UIViewController
+import platform.UIKit.transitionCoordinator
 import platform.darwin.NSObject
+import platform.darwin.dispatch_async
+import platform.darwin.dispatch_get_main_queue
 
 /**
  * Keeps a [UITabBarController] in sync with the tabs of [NativeTabDisplay]. Each tab is a
@@ -40,6 +43,13 @@ internal class UIKitTabCoordinator<T : Any>(
 
     /** What each tab's image was made from, so it is only redrawn when that changes. */
     private val iconSources = mutableListOf<Any?>()
+    private var selectedTab = 0
+
+    /** Whether this coordinator hid the tab bar for [NativeTabBarHidden]. */
+    private var hiddenByContent = false
+
+    /** A tab bar update waits for a navigation transition to finish. */
+    private var tabBarUpdateWaiting = false
     private var disposed = false
 
     // UIKit holds the delegate weakly, so the coordinator keeps it alive.
@@ -58,11 +68,13 @@ internal class UIKitTabCoordinator<T : Any>(
     ) {
         if (disposed) return
         this.parentLocals.value = parentLocals
+        this.selectedTab = selectedTab
         if (tabs.size != navigators.size) resize(tabs)
 
         tabs.forEachIndexed { index, tab ->
             val uiTab = uiTabs[index]
             if (uiTab.title != tab.title) uiTab.title = tab.title
+            if (uiTab.badgeValue != tab.badge) uiTab.badgeValue = tab.badge
             if (iconSources[index] != tab.iconSource) {
                 iconSources[index] = tab.iconSource
                 uiTab.image = tabImage(tab)
@@ -75,6 +87,38 @@ internal class UIKitTabCoordinator<T : Any>(
 
         val wanted = uiTabs[selectedTab]
         if (tabBarController.selectedTab != wanted) tabBarController.selectedTab = wanted
+        updateTabBarHidden()
+    }
+
+    /**
+     * Shows or hides the tab bar for the [NativeTabBarHidden] calls of the selected tab's top
+     * entry. While that entry hides the tab bar through its metadata, UIKit hides it with the push
+     * transition, and this leaves the tab bar alone so that the two do not fight.
+     */
+    private fun updateTabBarHidden() {
+        if (disposed || tabBarUpdateWaiting) return
+        val navigator = navigators.getOrNull(selectedTab) ?: return
+        // On iOS 27 a tab bar change made while a navigation transition is still running, which
+        // includes the delegate's didShow callback, never reaches the screen, although UIKit then
+        // reports the new state. It is made once the transition has finished instead.
+        val transition = navigator.navigationController.transitionCoordinator
+        if (transition != null) {
+            tabBarUpdateWaiting = true
+            val retry = weakly(this) {
+                it.tabBarUpdateWaiting = false
+                it.updateTabBarHidden()
+            }
+            val queued = transition.animateAlongsideTransition(null) { _ ->
+                dispatch_async(dispatch_get_main_queue(), retry)
+            }
+            if (!queued) dispatch_async(dispatch_get_main_queue(), retry)
+            return
+        }
+        if (navigator.topHidesTabBarWhenPushed) return
+        val hidden = navigator.topRequestsTabBarHidden
+        if (hidden == hiddenByContent) return
+        hiddenByContent = hidden
+        tabBarController.setTabBarHidden(hidden, animated = tabBarController.view.window != null)
     }
 
     fun dispose() {
@@ -106,6 +150,7 @@ internal class UIKitTabCoordinator<T : Any>(
         // The navigators must not capture this coordinator.
         val onBack = onBack
         val onNativeChange = onNativeChange
+        val onTopChromeChanged = weakly(this) { it.updateTabBarHidden() }
         for (index in navigators.size until tabs.size) {
             val tab = tabs[index]
             val navigator = UIKitNavigationCoordinator<T>(
@@ -113,6 +158,7 @@ internal class UIKitTabCoordinator<T : Any>(
                 configure = configure,
                 onBack = { onBack(index) },
                 onNativeChange = onNativeChange,
+                onTopChromeChanged = onTopChromeChanged,
             )
             navigators += navigator
             uiTabs += tabFor(index, tab, navigator.navigationController)
@@ -124,7 +170,7 @@ internal class UIKitTabCoordinator<T : Any>(
 
 // A top-level function so the provider block, which UIKit keeps, captures only the controller.
 private fun tabFor(index: Int, tab: TabLabel, controller: UIViewController): UITab =
-    UITab(tab.title, tabImage(tab), "tab-$index") { controller }
+    UITab(tab.title, tabImage(tab), "tab-$index") { controller }.also { it.badgeValue = tab.badge }
 
 @OptIn(ExperimentalNativeApi::class)
 private class TabBarDelegate(

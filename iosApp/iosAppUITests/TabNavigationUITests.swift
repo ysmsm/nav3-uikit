@@ -150,4 +150,92 @@ final class TabNavigationUITests: SampleUITestCase {
         XCTAssertTrue(tabButton("Search").waitForExistence(timeout: 5))
         XCTAssertTrue(tabButton("Search").isHittable)
     }
+
+    func testTabBadge() {
+        selectTab("Search")
+        expectBackStack("Search: SearchHome")
+        tap("Add Home badge")
+        tap("Add Home badge")
+        let home = tabButton("Home")
+        XCTAssertTrue(waitForValue(of: home) { $0.contains("2") }, "no badge: \(home.debugDescription)")
+        snapshot("badge")
+        tap("Clear Home badge")
+        XCTAssertTrue(waitForValue(of: home) { !$0.contains("2") }, "badge left: \(home.debugDescription)")
+    }
+
+    /// A tab's root screen hides the tab bar from its own state.
+    func testTabBarHiddenFromStateAtRoot() {
+        selectTab("Profile")
+        expectBackStack("Profile: Profile")
+        tap("Expand")
+        expectTabBar(shown: false, "tab bar still shown while expanded")
+        snapshot("expanded")
+        tap("Collapse")
+        expectTabBar(shown: true, "tab bar not back after collapsing")
+    }
+
+    func testTabBarComesBackWhenHidingScreenIsPopped() {
+        selectTab("Profile")
+        tap("Open panel")
+        expectBackStack("Profile: Profile > Panel")
+        tap("Expand")
+        expectTabBar(shown: false, "tab bar still shown while expanded")
+        tapBack()
+        expectBackStack("Profile: Profile")
+        expectTabBar(shown: true, "tab bar not back after the pop")
+    }
+
+    /// A screen with `tabBarHidden()` metadata pushed over a screen that hides the tab bar from its
+    /// state, then popped, leaves the tab bar hidden for that screen.
+    func testTabBarHiddenFromStateUnderMetadataScreen() {
+        selectTab("Profile")
+        tap("Open panel")
+        tap("Expand")
+        expectTabBar(shown: false, "tab bar still shown while expanded")
+        tap("Open focus")
+        expectVisible("Tab bar hidden here")
+        expectTabBar(shown: false, "tab bar shown on the focus screen")
+        tapBack()
+        expectBackStack("Profile: Profile > Panel")
+        expectTabBar(shown: false, "tab bar shown over the expanded screen")
+        tap("Collapse")
+        expectTabBar(shown: true, "tab bar not back after collapsing")
+    }
+
+    /// Only the selected tab's screen decides: an expanded screen in a hidden tab leaves the tab
+    /// bar to the tab on screen.
+    func testTabBarHiddenFromStateFollowsSelectedTab() {
+        selectTab("Profile")
+        tap("Expand")
+        expectTabBar(shown: false, "tab bar still shown while expanded")
+        tap("Go to Home tab")
+        expectBackStack("Home: Home")
+        expectTabBar(shown: true, "Home tab has no tab bar")
+        tap("Go to Profile tab")
+        expectBackStack("Profile: Profile")
+        expectTabBar(shown: false, "tab bar shown while the Profile tab is expanded")
+    }
+
+    /// Waits for UIKit's transitions, then for the tab bar to be usable or not, judged by the
+    /// Search tab button.
+    private func expectTabBar(shown: Bool, _ message: String, file: StaticString = #filePath, line: UInt = #line) {
+        settle()
+        let search = tabButton("Search")
+        let deadline = Date().addingTimeInterval(3)
+        repeat {
+            if (search.exists && search.isHittable) == shown { return }
+            usleep(200_000)
+        } while Date() < deadline
+        snapshot("failure")
+        XCTFail(message, file: file, line: line)
+    }
+
+    private func waitForValue(of element: XCUIElement, _ matches: (String) -> Bool) -> Bool {
+        let deadline = Date().addingTimeInterval(5)
+        repeat {
+            if element.exists, matches(element.value as? String ?? "") { return true }
+            usleep(200_000)
+        } while Date() < deadline
+        return false
+    }
 }

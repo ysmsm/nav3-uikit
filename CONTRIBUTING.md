@@ -46,7 +46,7 @@ xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp \
 The test classes and what each covers:
 
 - `NativeNavigationUITests` drives the single-stack sample and checks the `backStack: ...` label at the top of each screen.
-- `TabNavigationUITests` drives the tab sample: tab switching, per-tab state, reselecting a tab, programmatic selection, pushing into a hidden tab, sheets, a screen that hides the tab bar, where the tab container sits, and controller release.
+- `TabNavigationUITests` drives the tab sample: tab switching, per-tab state, reselecting a tab, programmatic selection, pushing into a hidden tab, sheets, a screen that hides the tab bar, tab badges, a screen that hides the tab bar from its state, where the tab container sits, and controller release.
 - `StandardAppUITests` drives the single-stack sample's Lab screen: a back the app refuses, a `NavigationBackHandler` that receives native back, a `DialogSceneStrategy` dialog, a screen without native bar metadata, bar items set from content, and controller release.
 - `RootSwapUITests` replaces the sign-in display with the tab display, checks where each container ends up, and signs out and in again to check that the root holds no container of a display that left.
 - `DefaultSizeUITests` and `ComposeBarUITests` run the single-stack sample without a modifier and above a Compose bar.

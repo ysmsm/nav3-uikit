@@ -5,6 +5,7 @@ import androidx.compose.animation.ContentTransform
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.SizeTransform
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,12 +13,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.key
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.selected
@@ -25,6 +28,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavEntryDecorator
 import androidx.navigation3.runtime.rememberDecoratedNavEntries
@@ -44,39 +48,50 @@ import androidx.navigationevent.NavigationEvent
  * The tab's icon is [systemImage], an SF Symbol name, on iOS when it is set, and [icon] otherwise.
  * iOS draws [icon] as a template image, so the tab bar tints it for the selected and unselected
  * states. Other platforms draw [icon] in the default tab bar.
+ *
+ * [badge] is shown on the tab, such as an unread count; null shows no badge. On iOS it is the
+ * tab's `badgeValue`, so UIKit draws the badge and only its text is up to the app. Other platforms
+ * draw it in the default tab bar; an app that passes its own `tabBar` draws it there.
  */
 public class NativeTab<out T : Any>(
     public val backStack: List<T>,
     public val title: String,
     public val icon: Painter? = null,
     public val systemImage: String? = null,
+    public val badge: String? = null,
 ) {
     /** A tab whose icon is the SF Symbol [icon] on iOS. */
-    public constructor(backStack: List<T>, title: String, icon: String) :
-        this(backStack, title, icon = null, systemImage = icon)
+    public constructor(backStack: List<T>, title: String, icon: String, badge: String? = null) :
+        this(backStack, title, icon = null, systemImage = icon, badge = badge)
 
-    internal val label: TabLabel get() = TabLabel(title, icon, systemImage)
+    internal val label: TabLabel get() = TabLabel(title, icon, systemImage, badge)
 }
 
 /**
  * One top-level destination of the single back stack [NativeTabDisplay]: the tab whose back stack
- * starts at [key]. The icon follows the same rules as [NativeTab].
+ * starts at [key]. The icon and [badge] follow the same rules as [NativeTab].
  */
 public class NativeTabRoot<out T : Any>(
     public val key: T,
     public val title: String,
     public val icon: Painter? = null,
     public val systemImage: String? = null,
+    public val badge: String? = null,
 ) {
     /** A tab whose icon is the SF Symbol [icon] on iOS. */
-    public constructor(key: T, title: String, icon: String) :
-        this(key, title, icon = null, systemImage = icon)
+    public constructor(key: T, title: String, icon: String, badge: String? = null) :
+        this(key, title, icon = null, systemImage = icon, badge = badge)
 
-    internal val label: TabLabel get() = TabLabel(title, icon, systemImage)
+    internal val label: TabLabel get() = TabLabel(title, icon, systemImage, badge)
 }
 
 /** What the tab bar shows for one tab. */
-internal data class TabLabel(val title: String, val icon: Painter?, val systemImage: String?) {
+internal data class TabLabel(
+    val title: String,
+    val icon: Painter?,
+    val systemImage: String?,
+    val badge: String? = null,
+) {
     /** What the tab's image is made from. */
     val iconSource: Any? get() = systemImage ?: icon
 }
@@ -101,10 +116,14 @@ internal data class TabLabel(val title: String, val icon: Painter?, val systemIm
  * ViewModels survive tab switches. Entries of different tabs never share decorator state, even
  * when the same key is on two back stacks.
  *
+ * A screen hides the tab bar from its own state with [NativeTabBarHidden], and from its metadata
+ * with [NativeNavigation.tabBarHidden].
+ *
  * Other platforms show the selected tab's back stack in a `NavDisplay` that receives the scene and
- * transition parameters, with [tabBar] below it; pass the app's own tab bar there. System back at
- * the root of any tab but the first selects the first tab, as in Navigation 3's multiple back
- * stack recipe. iOS ignores [tabBar] and the transition parameters.
+ * transition parameters, with [tabBar] below it; pass the app's own tab bar there. [tabBar] is
+ * hidden while a screen calls [NativeTabBarHidden]. System back at the root of any tab but the
+ * first selects the first tab, as in Navigation 3's multiple back stack recipe. iOS ignores
+ * [tabBar] and the transition parameters.
  */
 @Composable
 public fun <T : Any> NativeTabDisplay(
@@ -188,7 +207,7 @@ public fun <T : Any> NativeTabDisplay(
  *
  * Other platforms show the whole [backStack] in a `NavDisplay` with [tabBar] below it, so system
  * back follows [backStack] exactly as it did under `NavDisplay`, including from one tab's root to
- * the tab before it.
+ * the tab before it. [tabBar] is hidden while a screen calls [NativeTabBarHidden].
  *
  * The entries are decorated once, in [backStack] order, as `NavDisplay` decorates them. An entry
  * leaves composition and loses its decorator state when it leaves [backStack], so keep a tab's
@@ -311,13 +330,30 @@ private fun DefaultTabBar(tabs: List<TabLabel>, selectedTab: Int, onTabSelected:
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 tab.icon?.let { Image(it, contentDescription = null, modifier = Modifier.size(24.dp)) }
-                BasicText(
-                    tab.title,
-                    style = TextStyle(fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal),
-                )
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    BasicText(
+                        tab.title,
+                        style = TextStyle(fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal),
+                    )
+                    tab.badge?.let { DefaultBadge(it) }
+                }
             }
         }
     }
+}
+
+@Composable
+private fun DefaultBadge(text: String) {
+    BasicText(
+        text,
+        modifier = Modifier
+            .background(Color(0xFFFF3B30), RoundedCornerShape(percent = 50))
+            .padding(horizontal = 6.dp),
+        style = TextStyle(color = Color.White, fontSize = 12.sp),
+    )
 }
 
 @Composable

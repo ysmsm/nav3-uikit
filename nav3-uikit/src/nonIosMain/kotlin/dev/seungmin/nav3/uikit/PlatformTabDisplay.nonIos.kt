@@ -1,8 +1,11 @@
 package dev.seungmin.nav3.uikit
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigationevent.NavigationEventInfo
@@ -20,11 +23,8 @@ internal actual fun <T : Any> PlatformTabDisplay(
     tabBar: @Composable () -> Unit,
     modifier: Modifier,
 ) {
-    Column(modifier) {
-        Box(Modifier.weight(1f)) {
-            PlatformNavDisplay(entries[selectedTab], Modifier, onBack = { onBack(selectedTab) }, options)
-        }
-        tabBar()
+    TabDisplayLayout(tabBar, modifier) {
+        PlatformNavDisplay(entries[selectedTab], Modifier, onBack = { onBack(selectedTab) }, options)
     }
 
     // At the root of another tab, back returns to the first tab instead of leaving the app.
@@ -48,10 +48,19 @@ internal actual fun <T : Any> PlatformStackTabDisplay(
 ) {
     // The whole back stack goes to NavDisplay, so back crosses from one tab to the one before it
     // exactly as it did before the app switched to this display.
+    TabDisplayLayout(tabBar, modifier) {
+        PlatformNavDisplay(entries, Modifier, onBack, options)
+    }
+}
+
+/** [content] above [tabBar], which is hidden while a screen in [content] calls [NativeTabBarHidden]. */
+@Composable
+private fun TabDisplayLayout(tabBar: @Composable () -> Unit, modifier: Modifier, content: @Composable () -> Unit) {
+    val requests = remember { TabBarHiddenRequests() }
     Column(modifier) {
         Box(Modifier.weight(1f)) {
-            PlatformNavDisplay(entries, Modifier, onBack, options)
+            CompositionLocalProvider(LocalTabBarHiddenRequests provides requests, content = content)
         }
-        tabBar()
+        AnimatedVisibility(visible = !requests.hidden) { tabBar() }
     }
 }
